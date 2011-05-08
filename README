@@ -1,5 +1,7 @@
 Implementation of "Time-varying vector autoregressive models with stochastic volatility" by Kostas Triantafyllopoulos available at http://arxiv.org/abs/0802.0220 and published in Journal of Applied Statistics Vol. 38, No. 2 Feb 2011.
 
+kf stands for Kalman Filter. This package can be seen as an advanced Kalman Filter and the name is short. 
+
 -------------
 
 kf.cpp requires Boost uBLAS
