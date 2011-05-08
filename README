@@ -7,6 +7,9 @@ kf stands for Kalman Filter. This package can be seen as an advanced Kalman Filt
 kf.cpp requires Boost uBLAS
 kf_test.cpp and kf_speed.cpp require Boost Test and Boost Random 
 
+Boost Installation on Ubuntu:
+$ sudo apt-get install libboost-dev libboost-doc 
+
 -------------
 
 Test with 
