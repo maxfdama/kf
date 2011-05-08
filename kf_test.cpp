@@ -419,8 +419,6 @@ BOOST_AUTO_TEST_CASE( coefficients_couple_then_decouple )
     y = m(0)*x(0) + m(1)*x(1) + 0.5*Z();
   }
   BOOST_CHECK_CLOSE_FRACTION(fabs(rho*(kf.P(0,0)+kf.P(1,1))/2.0), fabs(kf.P(1,0)), .05);
-  
-  // TODO why is the sign on the estimated correlation always flipped?
 }
 
 BOOST_AUTO_TEST_CASE( ten_coefficients )

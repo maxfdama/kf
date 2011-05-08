@@ -56,8 +56,6 @@ public:
   double predict(vector<double> x) { return inner_prod(x, m); }
   double confidence() { return Q*(1-beta)*S/(k*(3*beta-2)); }
 
-  // TODO? private:
-
   double beta; // Coeffient rate of change adaptiveness 
   double k; // calculated from beta
   diagonal_matrix<double> Delta_root_inv; // Coefficient rate of change

@@ -1,0 +1,47 @@
+Implementation of "Time-varying vector autoregressive models with stochastic volatility" by Kostas Triantafyllopoulos available at http://arxiv.org/abs/0802.0220 and published in Journal of Applied Statistics Vol. 38, No. 2 Feb 2011.
+
+-------------
+
+kf.cpp requires Boost uBLAS
+kf_test.cpp and kf_speed.cpp require Boost Test and Boost Random 
+
+-------------
+
+Test with 
+g++ kf_test.cpp; ./a.out
+
+The correct output is
+Running N test cases...
+
+*** No errors detected
+
+
+Test runtime with
+g++ kf_speed.cpp; ./a.out
+
+Running 1 test case...
+gUnivariate runtime = 1
+Bivariate runtime = 3
+10-variate runtime = 47
+
+*** No errors detected
+
+
+Should compile with no warnings under -Wall.
+Also runnable with g++ -O3 compiler optimization flag set.
+
+-------------
+
+Please see test cases and code for usage.
+
+-------------
+
+Note that there is one errata in the paper to mention:
+In section 3.1, 
+Pt = Rt − Kt K't / Qt
+should be 
+Pt = Rt − Kt K't * Qt
+
+-------------
+
+Advanced C++ features: templates, default template arguments, operator overloading, overloaded operator overloading, default arguments, inline functions, multiple returns with reference parameters, macros
