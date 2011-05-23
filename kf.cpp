@@ -24,7 +24,7 @@ public:
       m_{t+1} = m_t + Omega_t,  Omega_t ~ N(0, W_t, Sigma_t)
       y_t = x_t m_t + epsilon_t,  epsilon_t ~ N(0, Sigma_t)
   */
-  KF(double beta = .99, vector<double> Delta = vector<double> (p, .99)) 
+  KF(double beta = .99, const vector<double>& Delta = vector<double> (p, .99)) 
     : Delta_root_inv(p),
       m(p),      
       P(p, p),
@@ -48,13 +48,13 @@ public:
     yPred = DBL_MAX; 
   }
 
-  double operator()(double y, vector<double> x);
-  double operator()(double y, vector<double> x, double& yVar);
-  void estimate(vector<double> x);
-  bool not_first_run() { return yPred != DBL_MAX; }
+  double operator()(double y, const vector<double>& x);
+  double operator()(double y, const vector<double>& x, double& yVar);
+  void estimate(const vector<double>& x);
+  bool not_first_run() const { return yPred != DBL_MAX; }
   void update(double y);
-  double predict(vector<double> x) { return inner_prod(x, m); }
-  double confidence() { return Q*(1-beta)*S/(k*(3*beta-2)); }
+  double predict(const vector<double>& x) const { return inner_prod(x, m); }
+  double confidence() const { return Q*(1-beta)*S/(k*(3*beta-2)); }
 
   double beta; // Coeffient rate of change adaptiveness 
   double k; // calculated from beta
@@ -76,7 +76,7 @@ public:
    See below
 */
 template <std::size_t p>
-double KF<p>::operator()(double y, vector<double> x)
+double KF<p>::operator()(double y, const vector<double>& x)
 {
   double ignore;
   return this->operator()(y, x, ignore);
@@ -93,7 +93,7 @@ double KF<p>::operator()(double y, vector<double> x)
 */
 
 template <std::size_t p>
-double KF<p>::operator()(double y, vector<double> x, double& yVar)
+double KF<p>::operator()(double y, const vector<double>& x, double& yVar)
 {
   estimate(x);
 
@@ -108,7 +108,7 @@ double KF<p>::operator()(double y, vector<double> x, double& yVar)
 }
 
 template <std::size_t p>
-void KF<p>::estimate(vector<double> x)
+void KF<p>::estimate(const vector<double>& x)
 {
   // uBlas requires introducing the temporary type matrix<double>
   R = prod(Delta_root_inv, matrix<double>(prod(P, Delta_root_inv)));
